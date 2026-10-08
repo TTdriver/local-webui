@@ -1,2 +1,30 @@
-# local-webui
-Local Linux WebUI desktop app with private browser storage and live resource metrics.
+# Local WebUI
+
+Current release: **0.1.1**. A local Linux desktop application.
+
+## Installation
+
+Download the repository source ZIP from GitHub, extract it, and open a terminal in that folder. On Ubuntu/Zorin install Python prerequisites:
+
+```bash
+sudo apt install python3-venv python3-tk python3-pil python3-psutil
+python3 install.py
+```
+
+The installer installs app files and a desktop/application-menu launcher. Existing user data is preserved. Local WebUI creates its isolated Qt runtime when needed.
+
+## Update notifications
+
+The app checks exactly once at launch in a background thread, using a five-second timeout and GitHub's public Contents API for the root `VERSION` file. There are no credentials in the request. Equal, older, malformed, and unavailable versions are silent. A newer version adds a muted bottom-right **Update available · vX.Y.Z ↗** link to this installation page. There are no automatic downloads or installations.
+
+`APP_VERSION`, `VERSION`, and the installer describe the same release. Update checks use the Contents API rather than the raw endpoint to avoid stale raw-file responses. Results pass through a queue to the GUI thread; normal status updates cannot replace the link.
+
+## Tests
+
+```bash
+python3 -m unittest test_update_check
+```
+
+## Runtime
+
+Requires Open WebUI at `http://127.0.0.1:3000`. Browser login/storage stays local. Image settings require a separately configured local image-settings service. This repository ships the desktop client, not the backend deployment.

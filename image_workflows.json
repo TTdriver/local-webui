@@ -1,0 +1,159 @@
+{
+  "studio": {
+    "flux-2-klein-9b-fp8.safetensors": {
+      "label": "FLUX.2 Klein 9B",
+      "config": {
+        "image_generation.model": "flux-2-klein-9b-fp8.safetensors",
+        "image_generation.comfyui.workflow": "{\"61\": {\"class_type\": \"KSamplerSelect\", \"inputs\": {\"sampler_name\": \"euler\"}}, \"70\": {\"class_type\": \"UNETLoader\", \"inputs\": {\"unet_name\": \"flux-2-klein-9b-fp8.safetensors\", \"weight_dtype\": \"default\"}}, \"71\": {\"class_type\": \"CLIPLoader\", \"inputs\": {\"clip_name\": \"qwen_3_8b_fp8mixed.safetensors\", \"type\": \"flux2\", \"device\": \"default\"}}, \"72\": {\"class_type\": \"VAELoader\", \"inputs\": {\"vae_name\": \"flux2-vae.safetensors\"}}, \"66\": {\"class_type\": \"EmptyFlux2LatentImage\", \"inputs\": {\"width\": 1024, \"height\": 1024, \"batch_size\": 1}}, \"62\": {\"class_type\": \"Flux2Scheduler\", \"inputs\": {\"steps\": 4, \"width\": 1024, \"height\": 1024}}, \"74\": {\"class_type\": \"CLIPTextEncode\", \"inputs\": {\"text\": \"Change the bag color to blue.\", \"clip\": [\"71\", 0]}}, \"82\": {\"class_type\": \"ConditioningZeroOut\", \"inputs\": {\"conditioning\": [\"74\", 0]}}, \"64\": {\"class_type\": \"SamplerCustomAdvanced\", \"inputs\": {\"noise\": [\"73\", 0], \"guider\": [\"63\", 0], \"sampler\": [\"61\", 0], \"sigmas\": [\"62\", 0], \"latent_image\": [\"66\", 0]}}, \"65\": {\"class_type\": \"VAEDecodeTiled\", \"inputs\": {\"samples\": [\"64\", 0], \"vae\": [\"72\", 0], \"tile_size\": 256, \"overlap\": 64, \"temporal_size\": 64, \"temporal_overlap\": 8}}, \"73\": {\"class_type\": \"RandomNoise\", \"inputs\": {\"noise_seed\": 43301611940728}}, \"63\": {\"class_type\": \"CFGGuider\", \"inputs\": {\"cfg\": 1, \"model\": [\"70\", 0], \"positive\": [\"74\", 0], \"negative\": [\"82\", 0]}}, \"9\": {\"class_type\": \"SaveImage\", \"inputs\": {\"images\": [\"65\", 0], \"filename_prefix\": \"Image-Studio-Flux\"}}}",
+        "image_generation.comfyui.nodes": [
+          {
+            "type": "model",
+            "node_ids": [
+              "70"
+            ],
+            "key": "unet_name"
+          },
+          {
+            "type": "prompt",
+            "node_ids": [
+              "74"
+            ],
+            "key": "text"
+          },
+          {
+            "type": "seed",
+            "node_ids": [
+              "73"
+            ],
+            "key": "noise_seed"
+          },
+          {
+            "type": "width",
+            "node_ids": [
+              "66",
+              "62"
+            ],
+            "key": "width"
+          },
+          {
+            "type": "height",
+            "node_ids": [
+              "66",
+              "62"
+            ],
+            "key": "height"
+          },
+          {
+            "type": "steps",
+            "node_ids": [
+              "62"
+            ],
+            "key": "steps"
+          },
+          {
+            "type": "n",
+            "node_ids": [
+              "66"
+            ],
+            "key": "batch_size"
+          }
+        ],
+        "image_generation.steps": 4,
+        "image_generation.engine": "comfyui"
+      }
+    },
+    "z_image_turbo_int8_convrot.safetensors": {
+      "label": "Z-Image Turbo",
+      "config": {
+        "image_generation.engine": "comfyui",
+        "image_generation.model": "z_image_turbo_int8_convrot.safetensors",
+        "image_generation.steps": 8,
+        "image_generation.comfyui.workflow": "{\"3\": {\"class_type\": \"KSampler\", \"inputs\": {\"seed\": 42, \"steps\": 8, \"cfg\": 1, \"sampler_name\": \"res_multistep\", \"scheduler\": \"simple\", \"denoise\": 1, \"model\": [\"11\", 0], \"positive\": [\"6\", 0], \"negative\": [\"7\", 0], \"latent_image\": [\"5\", 0]}}, \"4\": {\"class_type\": \"UNETLoader\", \"inputs\": {\"unet_name\": \"z_image_turbo_int8_convrot.safetensors\", \"weight_dtype\": \"default\"}}, \"5\": {\"class_type\": \"EmptySD3LatentImage\", \"inputs\": {\"width\": 1024, \"height\": 1024, \"batch_size\": 1}}, \"6\": {\"class_type\": \"CLIPTextEncode\", \"inputs\": {\"text\": \"A small robot watering flowers, colorful illustration\", \"clip\": [\"10\", 0]}}, \"7\": {\"class_type\": \"ConditioningZeroOut\", \"inputs\": {\"conditioning\": [\"6\", 0]}}, \"8\": {\"class_type\": \"VAEDecodeTiled\", \"inputs\": {\"samples\": [\"3\", 0], \"vae\": [\"12\", 0], \"tile_size\": 256, \"overlap\": 64, \"temporal_size\": 64, \"temporal_overlap\": 8}}, \"9\": {\"class_type\": \"SaveImage\", \"inputs\": {\"filename_prefix\": \"OllamaPocket\", \"images\": [\"8\", 0]}}, \"10\": {\"class_type\": \"CLIPLoader\", \"inputs\": {\"clip_name\": \"qwen_3_4b_fp8_mixed.safetensors\", \"type\": \"lumina2\", \"device\": \"default\"}}, \"11\": {\"class_type\": \"ModelSamplingAuraFlow\", \"inputs\": {\"model\": [\"900\", 0], \"shift\": 3}}, \"12\": {\"class_type\": \"VAELoader\", \"inputs\": {\"vae_name\": \"ae.safetensors\"}}, \"13\": {\"class_type\": \"LoraLoaderModelOnly\", \"inputs\": {\"model\": [\"4\", 0], \"lora_name\": \"NSFW_master_ZIT_000008766.safetensors\", \"strength_model\": 0.05}}, \"900\": {\"class_type\": \"LoraLoaderModelOnly\", \"inputs\": {\"model\": [\"13\", 0], \"lora_name\": \"personal_subject03_1791323161568168898_subject03.safetensors\", \"strength_model\": 0.8}, \"_meta\": {\"title\": \"Personal LoRA\"}}}",
+        "image_generation.comfyui.nodes": [
+          {
+            "type": "prompt",
+            "key": "text",
+            "node_ids": [
+              "6"
+            ]
+          },
+          {
+            "type": "model",
+            "key": "unet_name",
+            "node_ids": [
+              "4"
+            ]
+          },
+          {
+            "type": "width",
+            "key": "width",
+            "node_ids": [
+              "5"
+            ]
+          },
+          {
+            "type": "height",
+            "key": "height",
+            "node_ids": [
+              "5"
+            ]
+          },
+          {
+            "type": "steps",
+            "key": "steps",
+            "node_ids": [
+              "3"
+            ]
+          },
+          {
+            "type": "seed",
+            "key": "seed",
+            "node_ids": [
+              "3"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "editor": {
+    "flux-2-klein-9b-fp8.safetensors": {
+      "label": "FLUX.2 Klein 9B",
+      "config": {
+        "images.edit.model": "flux-2-klein-9b-fp8.safetensors",
+        "images.edit.comfyui.workflow": "{\"61\": {\"class_type\": \"KSamplerSelect\", \"inputs\": {\"sampler_name\": \"euler\"}}, \"70\": {\"class_type\": \"UNETLoader\", \"inputs\": {\"unet_name\": \"flux-2-klein-9b-fp8.safetensors\", \"weight_dtype\": \"default\"}}, \"71\": {\"class_type\": \"CLIPLoader\", \"inputs\": {\"clip_name\": \"qwen_3_8b_fp8mixed.safetensors\", \"type\": \"flux2\", \"device\": \"default\"}}, \"72\": {\"class_type\": \"VAELoader\", \"inputs\": {\"vae_name\": \"flux2-vae.safetensors\"}}, \"66\": {\"class_type\": \"EmptyFlux2LatentImage\", \"inputs\": {\"width\": [\"99\", 0], \"height\": [\"99\", 1], \"batch_size\": 1}}, \"80\": {\"class_type\": \"ImageScaleToTotalPixels\", \"inputs\": {\"upscale_method\": \"lanczos\", \"megapixels\": 1.0, \"resolution_steps\": 16, \"image\": [\"76\", 0]}}, \"62\": {\"class_type\": \"Flux2Scheduler\", \"inputs\": {\"steps\": 4, \"width\": [\"99\", 0], \"height\": [\"99\", 1]}}, \"74\": {\"class_type\": \"CLIPTextEncode\", \"inputs\": {\"text\": \"Change the bag color to blue.\", \"clip\": [\"71\", 0]}}, \"82\": {\"class_type\": \"ConditioningZeroOut\", \"inputs\": {\"conditioning\": [\"74\", 0]}}, \"121\": {\"class_type\": \"ReferenceLatent\", \"inputs\": {\"conditioning\": [\"82\", 0], \"latent\": [\"122\", 0]}}, \"99\": {\"class_type\": \"GetImageSize\", \"inputs\": {\"image\": [\"80\", 0]}}, \"123\": {\"class_type\": \"ReferenceLatent\", \"inputs\": {\"conditioning\": [\"74\", 0], \"latent\": [\"122\", 0]}}, \"122\": {\"class_type\": \"VAEEncodeTiled\", \"inputs\": {\"pixels\": [\"80\", 0], \"vae\": [\"72\", 0], \"tile_size\": 256, \"overlap\": 64, \"temporal_size\": 64, \"temporal_overlap\": 8}}, \"64\": {\"class_type\": \"SamplerCustomAdvanced\", \"inputs\": {\"noise\": [\"73\", 0], \"guider\": [\"63\", 0], \"sampler\": [\"61\", 0], \"sigmas\": [\"62\", 0], \"latent_image\": [\"66\", 0]}}, \"65\": {\"class_type\": \"VAEDecodeTiled\", \"inputs\": {\"samples\": [\"64\", 0], \"vae\": [\"72\", 0], \"tile_size\": 256, \"overlap\": 64, \"temporal_size\": 64, \"temporal_overlap\": 8}}, \"73\": {\"class_type\": \"RandomNoise\", \"inputs\": {\"noise_seed\": 43301611940728}}, \"63\": {\"class_type\": \"CFGGuider\", \"inputs\": {\"cfg\": 1, \"model\": [\"70\", 0], \"positive\": [\"123\", 0], \"negative\": [\"121\", 0]}}, \"76\": {\"class_type\": \"LoadImage\", \"inputs\": {\"image\": \"pocket-edit-test.png\"}}, \"9\": {\"class_type\": \"SaveImage\", \"inputs\": {\"images\": [\"65\", 0], \"filename_prefix\": \"Photo-Editor-9B\"}}}",
+        "images.edit.comfyui.nodes": [
+          {
+            "type": "model",
+            "node_ids": [
+              "70"
+            ],
+            "key": "unet_name"
+          },
+          {
+            "type": "prompt",
+            "node_ids": [
+              "74"
+            ],
+            "key": "text"
+          },
+          {
+            "type": "image",
+            "node_ids": [
+              "76"
+            ],
+            "key": "image"
+          },
+          {
+            "type": "seed",
+            "node_ids": [
+              "73"
+            ],
+            "key": "noise_seed"
+          }
+        ],
+        "images.edit.engine": "comfyui"
+      }
+    }
+  }
+}
