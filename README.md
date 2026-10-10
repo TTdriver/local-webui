@@ -28,3 +28,9 @@ python3 -m unittest test_update_check
 ## Runtime
 
 Requires Open WebUI at `http://127.0.0.1:3000`. Browser login/storage stays local. Image settings require a separately configured local image-settings service. This repository ships the desktop client, not the backend deployment.
+
+## Give Thanks
+
+If you’d like to say thanks by buying me a drink or helping cover AI tokens, it’s appreciated.
+
+[Give Thanks](https://thanks.kerchnerlabs.com)
